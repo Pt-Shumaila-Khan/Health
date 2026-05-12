@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Shumaila Khan | Physiotherapist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #dff1fb;
+      --sky-mid: #b8e0f7;
+      --sky-deep: #7ec8e3;
+      --sky-accent: #3aa6cf;
+      --sky-dark: #1a7fa8;
+      --white: #ffffff;
+      --off-white: #f4fafd;
+      --text: #1b3a4b;
+      --text-muted: #5a849a;
+      --gold: #c9a84c;
+      --nav-bg: rgba(255,255,255,0.88);
+      --card-bg: #ffffff;
+      --hero-grad: linear-gradient(145deg, #e8f7fd 0%, #c8eaf8 40%, #ddf1fb 100%);
+      --stat-bg: linear-gradient(135deg, #e8f7fd, #c8eaf8);
+      --edu-bg: linear-gradient(135deg, #e8f7fd 0%, #f4fafd 100%);
+    }
+
+    /* ── DARK MODE ── */
+    html.dark {
+      --sky: #0d2233;
+      --sky-mid: #1a3a52;
+      --sky-deep: #7ec8e3;
+      --sky-accent: #4db8e8;
+      --sky-dark: #7dd4f0;
+      --white: #0f1c28;
+      --off-white: #111f2e;
+      --text: #e2f0f8;
+      --text-muted: #7aafc8;
+      --gold: #f0c84c;
+      --nav-bg: rgba(10,24,36,0.92);
+      --card-bg: #152230;
+      --hero-grad: linear-gradient(145deg, #0b1922 0%, #0f2234 40%, #0d1f30 100%);
+      --stat-bg: linear-gradient(135deg, #0f2032, #162a40);
+      --edu-bg: linear-gradient(135deg, #0f2032 0%, #111f2e 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--sky-mid);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      transition: background 0.3s;
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--sky-dark); letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sky-dark); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--hero-grad);
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 5vw 60px;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(58,166,207,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(126,200,227,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      display: flex; align-items: center; gap: 6vw;
+      max-width: 1100px; width: 100%;
+      position: relative; z-index: 1;
+    }
+
+    .avatar-wrap {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .avatar-ring {
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky-accent), var(--sky-deep), var(--sky-mid));
+      padding: 5px;
+      box-shadow: 0 20px 60px rgba(58,166,207,0.35), 0 4px 16px rgba(0,0,0,0.08);
+      animation: floatAvatar 5s ease-in-out infinite;
+    }
+    @keyframes floatAvatar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .avatar-ring img {
+      width: 100%; height: 100%;
+      border-radius: 50%; object-fit: cover; object-position: top center;
+      border: 4px solid white;
+    }
+    .gold-badge {
+      position: absolute; bottom: 10px; right: 10px;
+      background: linear-gradient(135deg, #c9a84c, #f0d080);
+      color: #4a3000;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+      padding: 6px 12px; border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(201,168,76,0.45);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .gold-badge::before { content: '🏅'; font-size: 0.9rem; }
+
+    .hero-text { flex: 1; }
+    .hero-subtitle {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--sky-accent);
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-subtitle::before {
+      content: ''; display: block; width: 30px; height: 2px;
+      background: var(--sky-accent);
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700; line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .hero-name span { color: var(--sky-dark); }
+    .hero-tagline {
+      font-size: 1.05rem; color: var(--text-muted); line-height: 1.7;
+      max-width: 480px; margin-bottom: 36px;
+    }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sky-accent), var(--sky-dark));
+      color: white; padding: 14px 32px; border-radius: 50px;
+      font-weight: 600; font-size: 0.9rem; letter-spacing: 0.03em;
+      text-decoration: none; box-shadow: 0 8px 24px rgba(58,166,207,0.4);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(58,166,207,0.5); }
+    html.dark .btn-primary {
+      background: linear-gradient(135deg, #0d2a3d, #0a1e2e);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      border: 1.5px solid var(--sky-accent);
+      color: var(--sky-dark);
+    }
+    html.dark .btn-primary:hover { box-shadow: 0 12px 30px rgba(77,184,232,0.25); }
+    .btn-outline {
+      border: 2px solid var(--sky-accent); color: var(--sky-dark);
+      padding: 14px 32px; border-radius: 50px; font-weight: 600;
+      font-size: 0.9rem; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--sky-accent); color: white; }
+    html.dark .btn-outline { color: var(--sky-dark); border-color: var(--sky-accent); }
+    html.dark .btn-outline:hover { background: var(--sky-accent); color: #0f1c28; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 90px 5vw; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--sky-accent);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--sky-mid); max-width: 60px; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700;
+      color: var(--text); margin-bottom: 50px; line-height: 1.2;
+    }
+    .center { text-align: center; }
+    .center .section-label { justify-content: center; }
+    .center .section-label::after { display: none; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      max-width: 1100px; margin: 0 auto; align-items: start;
+    }
+    .about-text p {
+      color: var(--text-muted); line-height: 1.85; font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    .stats-row {
+      display: flex; gap: 30px; margin-top: 36px;
+    }
+    .stat-box {
+      background: var(--stat-bg);
+      border-radius: 16px; padding: 20px 24px; flex: 1;
+      border: 1px solid var(--sky-mid);
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 700; color: var(--sky-dark);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+
+    .specialties-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .specialty-card {
+      background: var(--off-white);
+      border: 1px solid var(--sky-mid); border-radius: 14px;
+      padding: 18px 20px; transition: all 0.25s;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .specialty-card:hover { border-color: var(--sky-accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(58,166,207,0.12); }
+    .specialty-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .specialty-name { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+    .specialty-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--off-white); }
+    .exp-wrapper { max-width: 800px; margin: 0 auto; }
+    .exp-card {
+      background: var(--card-bg);
+      border-radius: 24px; padding: 40px;
+      border: 1px solid var(--sky-mid);
+      box-shadow: 0 8px 40px rgba(58,166,207,0.08);
+      position: relative; overflow: hidden;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 5px; height: 100%;
+      background: linear-gradient(180deg, var(--sky-accent), var(--sky-deep));
+      border-radius: 5px 0 0 5px;
+    }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .exp-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 700; color: var(--text);
+    }
+    .exp-duration {
+      background: linear-gradient(135deg, var(--sky-accent), var(--sky-dark));
+      color: white; font-size: 0.78rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 20px; letter-spacing: 0.05em;
+    }
+    .exp-clinic {
+      font-size: 1.05rem; font-weight: 600; color: var(--sky-dark); margin-bottom: 6px;
+    }
+    .exp-location { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; display: flex; align-items: center; gap: 5px; }
+    .exp-duties { list-style: none; }
+    .exp-duties li {
+      font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;
+      padding: 6px 0; border-bottom: 1px solid var(--sky); display: flex; align-items: baseline; gap: 10px;
+    }
+    .exp-duties li:last-child { border: none; }
+    .exp-duties li::before { content: '→'; color: var(--sky-accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--white); }
+    .edu-wrapper { max-width: 900px; margin: 0 auto; display: grid; gap: 24px; }
+    .edu-card {
+      background: var(--edu-bg);
+      border: 1px solid var(--sky-mid); border-radius: 20px;
+      padding: 32px 36px; display: flex; gap: 28px; align-items: flex-start;
+    }
+    .edu-icon {
+      width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--sky-accent), var(--sky-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 6px 18px rgba(58,166,207,0.3);
+    }
+    .edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--text); }
+    .edu-uni { font-weight: 600; color: var(--sky-dark); font-size: 0.95rem; margin-top: 4px; }
+    .edu-year { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+    .gold-medal-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #f8e98a, #c9a84c);
+      color: #4a3000; font-size: 0.75rem; font-weight: 700;
+      padding: 5px 14px; border-radius: 20px; margin-top: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--off-white); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px; max-width: 1100px; margin: 0 auto;
+    }
+    .service-card {
+      background: var(--card-bg); border-radius: 20px;
+      padding: 32px 28px; border: 1px solid var(--sky-mid);
+      text-align: center; transition: all 0.3s;
+      box-shadow: 0 4px 16px rgba(58,166,207,0.05);
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(58,166,207,0.15); border-color: var(--sky-accent); }
+    .service-emoji { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .service-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: linear-gradient(145deg, #1a7fa8 0%, #3aa6cf 50%, #7ec8e3 100%);
+      color: white;
+    }
+    html.dark #contact {
+      background: linear-gradient(145deg, #061420 0%, #0a1f30 50%, #0d2538 100%);
+    }
+    html.dark #contact .section-title { color: var(--sky-dark); }
+    html.dark #contact .section-label { color: rgba(125,212,240,0.75); }
+    html.dark .contact-info p { color: rgba(180,220,240,0.85); }
+    html.dark .contact-item {
+      background: rgba(77,184,232,0.08);
+      border-color: rgba(77,184,232,0.2);
+    }
+    html.dark .contact-item-label { color: rgba(125,212,240,0.65); }
+    html.dark .contact-item-value { color: #b8dff0; }
+    html.dark .contact-item-value a { color: #b8dff0; }
+    html.dark .contact-form input,
+    html.dark .contact-form textarea {
+      background: rgba(77,184,232,0.08);
+      border-color: rgba(77,184,232,0.2);
+      color: #b8dff0;
+    }
+    html.dark .contact-form input::placeholder,
+    html.dark .contact-form textarea::placeholder { color: rgba(125,212,240,0.45); }
+    html.dark .contact-form input:focus,
+    html.dark .contact-form textarea:focus { border-color: rgba(77,184,232,0.6); }
+    html.dark .btn-white {
+      background: #0d2538;
+      color: var(--sky-dark);
+      border: 1.5px solid rgba(77,184,232,0.4);
+    }
+    html.dark .btn-white:hover:not(:disabled) { background: #0f2e45; }
+    #contact .section-label { color: rgba(255,255,255,0.75); }
+    #contact .section-label::after { background: rgba(255,255,255,0.3); }
+    #contact .section-title { color: white; }
+    .contact-inner {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+    }
+    .contact-info p { font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 30px; }
+    .contact-items { display: flex; flex-direction: column; gap: 18px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(255,255,255,0.12); border-radius: 14px;
+      padding: 16px 20px; border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+    }
+    .contact-item-icon { font-size: 1.3rem; }
+    .contact-item-label { font-size: 0.75rem; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-item-value { font-size: 0.92rem; font-weight: 600; color: white; }
+    .contact-item-value a { color: white; text-decoration: none; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form input,
+    .contact-form textarea {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 12px; padding: 14px 18px;
+      color: white; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: rgba(255,255,255,0.55); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: rgba(255,255,255,0.7); }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+
+    /* Send button */
+    .btn-white {
+      background: white; color: var(--sky-dark);
+      font-weight: 700; font-size: 0.9rem; letter-spacing: 0.03em;
+      padding: 14px 32px; border-radius: 50px; border: none;
+      cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; font-family: 'DM Sans', sans-serif;
+    }
+    .btn-white:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.2); }
+    .btn-white:disabled { opacity: 0.8; cursor: not-allowed; transform: none; }
+
+    /* Timer ring */
+    .timer-ring { width: 22px; height: 22px; flex-shrink: 0; }
+    .timer-ring circle { fill: none; stroke: var(--sky-dark); stroke-width: 3; stroke-dasharray: 57; stroke-dashoffset: 57; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; }
+    .timer-num { font-size: 0.82rem; font-weight: 800; color: var(--sky-dark); min-width: 14px; text-align: center; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(26,63,75,0.55);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .modal-box {
+      background: white; border-radius: 28px;
+      padding: 52px 48px; max-width: 420px; width: 100%; text-align: center;
+      box-shadow: 0 30px 80px rgba(58,166,207,0.25), 0 8px 24px rgba(0,0,0,0.1);
+      animation: slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+    .modal-icon { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 20px; background: linear-gradient(135deg, #e8f7fd, #b8e0f7); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; box-shadow: 0 8px 24px rgba(58,166,207,0.2); }
+    .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .modal-msg { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 28px; }
+    .modal-close { background: linear-gradient(135deg, var(--sky-accent), var(--sky-dark)); color: white; border: none; padding: 13px 36px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 6px 20px rgba(58,166,207,0.4); transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .modal-close:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(58,166,207,0.5); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,0.6);
+      text-align: center; padding: 30px 5vw;
+      font-size: 0.82rem; transition: background 0.3s;
+    }
+    footer span { color: var(--sky-deep); }
+    html.dark footer { background: #060e16; color: rgba(125,212,240,0.5); }
+    html.dark footer span { color: var(--sky-accent); }
+
+    /* ── DARK MODE TOGGLE ── */
+    .dark-toggle {
+      background: var(--sky-mid); border: none; border-radius: 50px;
+      width: 44px; height: 24px; cursor: pointer;
+      position: relative; transition: background 0.3s; flex-shrink: 0;
+      display: flex; align-items: center; padding: 2px 3px;
+    }
+    .dark-toggle::after {
+      content: ''; position: absolute;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: white; left: 3px;
+      transition: transform 0.3s, background 0.3s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    html.dark .dark-toggle { background: var(--sky-accent); }
+    html.dark .dark-toggle::after { transform: translateX(20px); }
+    .toggle-icon { font-size: 0.75rem; position: absolute; right: 5px; pointer-events: none; }
+    html.dark .toggle-icon { right: auto; left: 5px; }
+
+    /* ── MOBILE DRAWER dark ── */
+    html.dark .mobile-drawer { background: rgba(10,24,36,0.55); }
+    html.dark .mobile-drawer a { color: var(--text); }
+
+    /* ── MODAL dark ── */
+    html.dark .modal-box { background: #152230; }
+    html.dark .modal-title { color: var(--text); }
+    html.dark .modal-msg { color: var(--text-muted); }
+
+    /* ── BODY transition ── */
+    body { transition: background 0.3s, color 0.3s; }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 6px; z-index: 200;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2.5px;
+      background: var(--sky-dark); border-radius: 3px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* ── MOBILE DRAWER ── */
+    .mobile-drawer {
+      display: none; position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+      z-index: 99; flex-direction: column;
+      padding: 12px 0 30px;
+      border-top: 1px solid rgba(184,224,247,0.4);
+    }
+    .mobile-drawer.open { display: flex; animation: drawerIn 0.25s ease; }
+    @keyframes drawerIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+    .mobile-drawer a {
+      text-decoration: none; font-size: 1.1rem; font-weight: 600;
+      color: var(--text); letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 16px 28px; border-bottom: 1px solid rgba(184,224,247,0.35);
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-drawer a:last-child { border-bottom: none; }
+    .mobile-drawer a:hover { color: var(--sky-dark); background: rgba(58,166,207,0.08); }
+
+    /* ── RESPONSIVE (original) ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-subtitle { justify-content: center; }
+      .hero-subtitle::before { display: none; }
+      .hero-ctas { justify-content: center; }
+      .avatar-ring { width: 240px; height: 240px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .specialties-grid { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="confirmModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-icon">✅</div>
+    <div class="modal-title">Message Sent!</div>
+    <div class="modal-msg">
+      Thank you for reaching out!<br />
+      <strong>Dr. Shumaila Khan</strong> has received your message and will get back to you as soon as possible. 💙
+    </div>
+    <button class="modal-close" onclick="closeModal()">Got it, Thanks!</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Dr. Shumaila Khan</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" aria-label="Toggle dark mode">
+      <span class="toggle-icon" id="toggleIcon">🌙</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="#about"      onclick="closeMenu()">About</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#education"  onclick="closeMenu()">Education</a>
+  <a href="#services"   onclick="closeMenu()">Services</a>
+  <a href="#contact"    onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="avatar-wrap">
+      <div class="avatar-ring">
+        <img src="avatar.png" alt="Dr. Shumaila Khan" />
+      </div>
+      <div class="gold-badge">Gold Medalist</div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-subtitle">Physiotherapist &amp; Rehabilitation Specialist</div>
+      <h1 class="hero-name"><strong>Dr. Shumaila</strong><br /><span>Khan</span></h1>
+      <p class="hero-tagline">Dedicated to restoring movement, relieving pain, and empowering patients to live their best, most active lives through evidence-based physiotherapy care.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Book a Consultation</a>
+        <a href="#about" class="btn-outline">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Healing Through<br />Expert Care</h2>
+      <p>I am a passionate and dedicated physiotherapist with a Gold Medal distinction from Jamia Hamdard University, one of India's premier health sciences institutions. My journey in physiotherapy is driven by a deep commitment to patient-centered care and evidence-based rehabilitation.</p>
+      <p>With hands-on experience at Aktivhealth Physiotherapy &amp; Rehabilitation Clinic in Delhi, I have helped patients recover from sports injuries, post-surgical conditions, musculoskeletal disorders, and neurological challenges.</p>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num">1+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">Patients Treated</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">🥇</div>
+          <div class="stat-label">Gold Medalist</div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:0.15s">
+      <div class="section-label">Specialties</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:24px;">Areas of Expertise</h3>
+      <div class="specialties-grid">
+        <div class="specialty-card"><div class="specialty-icon">🦴</div><div><div class="specialty-name">Musculoskeletal</div><div class="specialty-desc">Joint &amp; muscle rehabilitation</div></div></div>
+        <div class="specialty-card"><div class="specialty-icon">🧠</div><div><div class="specialty-name">Neurological</div><div class="specialty-desc">Stroke &amp; nerve recovery</div></div></div>
+        <div class="specialty-card"><div class="specialty-icon">⚽</div><div><div class="specialty-name">Sports Injuries</div><div class="specialty-desc">Performance &amp; recovery</div></div></div>
+        <div class="specialty-card"><div class="specialty-icon">🏃</div><div><div class="specialty-name">Post-Surgical</div><div class="specialty-desc">Post-op rehabilitation</div></div></div>
+        <div class="specialty-card"><div class="specialty-icon">🧘</div><div><div class="specialty-name">Manual Therapy</div><div class="specialty-desc">Hands-on techniques</div></div></div>
+        <div class="specialty-card"><div class="specialty-icon">⚡</div><div><div class="specialty-name">Electrotherapy</div><div class="specialty-desc">TENS, ultrasound &amp; more</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label center fade-up">Experience</div>
+    <h2 class="section-title center fade-up">Professional Journey</h2>
+    <div class="exp-wrapper fade-up">
+      <div class="exp-card">
+        <div class="exp-top">
+          <div class="exp-role">Physiotherapist</div>
+          <div class="exp-duration">2023 – Present · 1+ Year</div>
+        </div>
+        <div class="exp-clinic">Aktivhealth Physiotherapy &amp; Rehabilitation Clinic</div>
+        <div class="exp-location">📍 Delhi, India</div>
+        <ul class="exp-duties">
+          <li>Conducted thorough patient assessments and developed individualized treatment plans for musculoskeletal and neurological conditions.</li>
+          <li>Administered manual therapy, therapeutic exercises, and electrotherapy modalities including TENS, IFT, and ultrasound.</li>
+          <li>Managed rehabilitation programs for post-surgical patients including knee replacements, ACL reconstructions, and spinal surgeries.</li>
+          <li>Provided sports injury management and return-to-sport rehabilitation for athletes.</li>
+          <li>Educated patients and families on home exercise programs and injury prevention strategies.</li>
+          <li>Collaborated with multidisciplinary teams including orthopedic surgeons, neurologists, and occupational therapists.</li>
+          <li>Maintained detailed patient records and tracked treatment outcomes using evidence-based measures.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label center fade-up">Education</div>
+    <h2 class="section-title center fade-up">Academic Background</h2>
+    <div class="edu-wrapper fade-up">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">Bachelor of Physiotherapy (BPT)</div>
+          <div class="edu-uni">Jamia Hamdard University, New Delhi</div>
+          <div class="edu-year">Graduated with Distinction</div>
+          <div class="gold-medal-badge">🏅 University Gold Medalist</div>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:12px;line-height:1.7;">Awarded the Gold Medal for achieving the highest academic performance in the Bachelor of Physiotherapy program — a testament to academic excellence and clinical dedication.</p>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">📜</div>
+        <div>
+          <div class="edu-degree">Clinical Internship</div>
+          <div class="edu-uni">Hamdard Institute of Medical Sciences &amp; Research (HIMSR)</div>
+          <div class="edu-year">Rotational clinical training across departments</div>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:12px;line-height:1.7;">Completed rotational internship across orthopedic, neurological, cardiopulmonary, and pediatric physiotherapy departments, gaining broad clinical exposure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label center fade-up">Services</div>
+    <h2 class="section-title center fade-up">What I Offer</h2>
+    <div class="services-grid fade-up">
+      <div class="service-card"><span class="service-emoji">🦴</span><div class="service-name">Orthopedic Rehab</div><div class="service-desc">Comprehensive rehabilitation for fractures, joint injuries, and musculoskeletal pain conditions.</div></div>
+      <div class="service-card"><span class="service-emoji">🧠</span><div class="service-name">Neurological Rehab</div><div class="service-desc">Specialized recovery programs for stroke, Parkinson's, and nerve injury patients.</div></div>
+      <div class="service-card"><span class="service-emoji">⚽</span><div class="service-name">Sports Physiotherapy</div><div class="service-desc">Injury prevention, performance optimization, and return-to-sport rehabilitation.</div></div>
+      <div class="service-card"><span class="service-emoji">💆</span><div class="service-name">Manual Therapy</div><div class="service-desc">Hands-on techniques including joint mobilization, soft tissue therapy, and myofascial release.</div></div>
+      <div class="service-card"><span class="service-emoji">🏋️</span><div class="service-name">Exercise Therapy</div><div class="service-desc">Customized therapeutic exercise programs for strength, flexibility, and functional recovery.</div></div>
+      <div class="service-card"><span class="service-emoji">⚡</span><div class="service-name">Electrotherapy</div><div class="service-desc">TENS, IFT, ultrasound, and laser therapy for pain relief and tissue healing.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label center fade-up">Get In Touch</div>
+    <h2 class="section-title center fade-up" style="color:white;">Book a Consultation</h2>
+    <div class="contact-inner fade-up">
+      <div class="contact-info">
+        <p>Ready to start your recovery journey? Reach out to schedule an appointment or ask any questions about your condition.</p>
+        <div class="contact-items">
+          <div class="contact-item"><div class="contact-item-icon">📧</div><div><div class="contact-item-label">Email</div><div class="contact-item-value"><a href="/cdn-cgi/l/email-protection#7b4c4c4b08130e161a12171a10131a153b1c161a121755181416"><span class="__cf_email__" data-cfemail="64535354170c1109050d08050f0c050a240309050d084a070b09">[email&#160;protected]</span></a></div></div></div>
+          <div class="contact-item"><div class="contact-item-icon">📍</div><div><div class="contact-item-label">Location</div><div class="contact-item-value">Delhi, India</div></div></div>
+          <div class="contact-item"><div class="contact-item-icon">🏥</div><div><div class="contact-item-label">Clinic</div><div class="contact-item-value">Aktivhealth Physiotherapy &amp; Rehabilitation</div></div></div>
+          <div class="contact-item"><div class="contact-item-icon">🕐</div><div><div class="contact-item-label">Availability</div><div class="contact-item-value">Mon – Sat, 9:00 AM – 6:00 PM</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form">
+          <input type="text"  id="cf-name"    placeholder="Your Full Name" />
+          <input type="email" id="cf-email"   placeholder="Your Email Address" />
+          <input type="text"  id="cf-subject" placeholder="Subject / Condition" />
+          <textarea           id="cf-message" placeholder="Tell me about your condition or what you're looking for…"></textarea>
+          <button class="btn-white" id="sendBtn" onclick="handleSend()">
+            Send Message →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Dr. Shumaila Khan</span> · Physiotherapist · Delhi, India &nbsp;|&nbsp; Designed with care 💙</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* ── DARK MODE ── */
+  function toggleDark() {
+    var html = document.documentElement;
+    var icon = document.getElementById('toggleIcon');
+    html.classList.toggle('dark');
+    var isDark = html.classList.contains('dark');
+    icon.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+  // Load saved theme
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.classList.add('dark');
+      var icon = document.getElementById('toggleIcon');
+      if (icon) icon.textContent = '☀️';
+    }
+  })();
+
+  /* ── HAMBURGER MENU ── */
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileDrawer').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileDrawer').classList.remove('open');
+  }
+  // Close when tapping outside
+  document.addEventListener('click', function(e) {
+    var h = document.getElementById('hamburger');
+    var d = document.getElementById('mobileDrawer');
+    if (!h.contains(e.target) && !d.contains(e.target)) closeMenu();
+  });
+
+  /* ── SEND WITH 5-SECOND TIMER ── */
+  function handleSend() {
+    var name    = (document.getElementById('cf-name').value    || '').trim();
+    var email   = (document.getElementById('cf-email').value   || '').trim();
+    var subject = (document.getElementById('cf-subject').value || '').trim();
+    var message = (document.getElementById('cf-message').value || '').trim();
+
+    var to      = '770shumailakhan@gmail.com';
+    var subLine = encodeURIComponent((subject || 'Consultation Request') + (name ? ' — ' + name : ''));
+    var body    = encodeURIComponent(
+      'Name: '    + (name    || 'N/A') + '\n' +
+      'Email: '   + (email   || 'N/A') + '\n' +
+      'Subject: ' + (subject || 'N/A') + '\n\n' +
+      'Message:\n' + (message || 'N/A')
+    );
+
+    // Open mail client
+    window.location.href = 'mailto:' + to + '?subject=' + subLine + '&body=' + body;
+
+    // Start 5-second countdown
+    var btn  = document.getElementById('sendBtn');
+    var secs = 5;
+    var CIRC = 57;
+
+    btn.disabled = true;
+    btn.innerHTML =
+      '<svg class="timer-ring" viewBox="0 0 22 22">' +
+        '<circle id="timerCircle" cx="11" cy="11" r="9"/>' +
+      '</svg>' +
+      '<span class="timer-num" id="timerNum">' + secs + '</span>' +
+      '<span>Opening mail app…</span>';
+
+    var circle = document.getElementById('timerCircle');
+    circle.style.strokeDashoffset = CIRC;
+    void circle.getBoundingClientRect();
+    circle.style.transition = 'stroke-dashoffset ' + secs + 's linear';
+    circle.style.strokeDashoffset = 0;
+
+    var interval = setInterval(function() {
+      secs--;
+      var numEl = document.getElementById('timerNum');
+      if (numEl) numEl.textContent = secs;
+      if (secs <= 0) {
+        clearInterval(interval);
+        document.getElementById('confirmModal').classList.add('show');
+        btn.disabled = false;
+        btn.innerHTML = 'Send Another Message →';
+        ['cf-name','cf-email','cf-subject','cf-message'].forEach(function(id) {
+          var el = document.getElementById(id); if (el) el.value = '';
+        });
+      }
+    }, 1000);
+  }
+
+  function closeModal() {
+    document.getElementById('confirmModal').classList.remove('show');
+  }
+  document.getElementById('confirmModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  /* ── SCROLL FADE-UP ── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+  /* ── NAV ACTIVE HIGHLIGHT ── */
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', function() {
+    var current = '';
+    sections.forEach(function(s) { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+    navLinks.forEach(function(a) {
+      var active = a.getAttribute('href') === '#' + current;
+      a.style.color      = active ? 'var(--sky-dark)' : '';
+      a.style.fontWeight = active ? '700' : '';
+    });
+  });
+</script>
+</body>
+</html>
